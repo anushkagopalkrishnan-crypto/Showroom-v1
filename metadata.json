@@ -1,0 +1,6 @@
+{
+  "name": "Showroom",
+  "description": "Turn prospect discovery notes, help content, and product capabilities into a narrated personalized demo video and buyer follow-up plan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
