@@ -2,14 +2,9 @@
 
 @theme {
   /* Cobalt (Talkdesk design system) for the Showroom app UI.
-     The generated video keeps its own fonts/colours (see .video-scene). */
+     The generated videos use the same tokens (Talkdesk Purple, Roboto). */
   --font-cobalt: "Roboto", ui-sans-serif, system-ui, sans-serif;
   --font-cobalt-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-
-  /* Video-scene fonts (unchanged; must match videoExporter.ts) */
-  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Cobalt colour tokens. Values come from Talkdesk Brand Guidelines 4.0.1
      (Talkdesk Purple #5405BD, Deep Purple #180136, purple/neutral tints).
@@ -62,20 +57,6 @@
     font-family: var(--font-cobalt-mono);
   }
 
-  /* The generated video is prospect-branded content, not app UI: keep its
-     original typography so the player matches the exported file. */
-  .video-scene {
-    font-family: var(--font-sans);
-  }
-  .video-scene h1,
-  .video-scene h2,
-  .video-scene h3,
-  .video-scene h4 {
-    font-family: var(--font-display);
-  }
-  .video-scene .font-mono {
-    font-family: var(--font-mono);
-  }
 }
 
 .tabular-nums {

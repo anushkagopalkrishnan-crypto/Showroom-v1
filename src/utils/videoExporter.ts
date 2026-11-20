@@ -85,7 +85,7 @@ export async function exportStoryboardWebm(options: {
 
   const brand = normalizeHexColor(brandColor);
   const contrastInk = getContrastTextColor(brand);
-  const deepBrand = mixHexColor(brand, '#0F172A', 0.38);
+  const deepBrand = mixHexColor(brand, '#180136', 0.38);
   const softBrand = mixHexColor(brand, '#FFFFFF', 0.92);
 
   const canvasStream = canvas.captureStream(30);
@@ -156,28 +156,28 @@ export async function exportStoryboardWebm(options: {
       ctx.fillStyle = contrastInk;
 
       if (scene.type === 'title_card') {
-        ctx.font = '700 54px "Plus Jakarta Sans", sans-serif';
+        ctx.font = '700 54px Roboto, sans-serif';
         const lines = wrapTextLines(ctx, c.headline || scene.title, 1000);
         lines.forEach((line, i) => {
           ctx.fillText(line, 110, 290 + i * 68);
         });
-        ctx.font = '400 26px "DM Sans", sans-serif';
+        ctx.font = '400 26px Roboto, sans-serif';
         ctx.globalAlpha = alpha * 0.88;
         const subLines = wrapTextLines(ctx, c.subtitle || '', 960);
         subLines.forEach((line, i) => {
           ctx.fillText(line, 110, 380 + lines.length * 40 + i * 36);
         });
       } else {
-        ctx.font = '700 44px "Plus Jakarta Sans", sans-serif';
+        ctx.font = '700 44px Roboto, sans-serif';
         ctx.fillText(c.heading || 'Suggested next steps', 110, 220);
-        ctx.font = '400 24px "DM Sans", sans-serif';
+        ctx.font = '400 24px Roboto, sans-serif';
         (c.nextSteps ?? []).forEach((step, idx) => {
           ctx.fillText(`•  ${step}`, 110, 300 + idx * 48);
         });
       }
       ctx.restore();
     } else {
-      ctx.fillStyle = '#F8FAFC';
+      ctx.fillStyle = '#F4F5F7';
       ctx.fillRect(0, 0, 1280, 720);
 
       // Top accent bar
@@ -185,8 +185,8 @@ export async function exportStoryboardWebm(options: {
       ctx.fillRect(0, 0, 1280, 8);
 
       if (scene.type === 'what_we_heard') {
-        ctx.fillStyle = '#0F172A';
-        ctx.font = '700 38px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = '#180136';
+        ctx.font = '700 38px Roboto, sans-serif';
         ctx.fillText(c.heading || 'What we heard', 96, 120);
 
         const quotes = c.quotes ?? [];
@@ -196,12 +196,12 @@ export async function exportStoryboardWebm(options: {
           ctx.fillStyle = '#FFFFFF';
           drawRoundedRect(ctx, 96, y, 1088, 108, 10);
           ctx.fill();
-          ctx.strokeStyle = '#E2E8F0';
+          ctx.strokeStyle = '#EAEBEF';
           ctx.lineWidth = 2;
           ctx.stroke();
 
-          ctx.fillStyle = '#0F172A';
-          ctx.font = '500 22px "DM Sans", sans-serif';
+          ctx.fillStyle = '#180136';
+          ctx.font = '500 22px Roboto, sans-serif';
           const qLines = wrapTextLines(ctx, `“${quotes[i]}”`, 1020);
           qLines.slice(0, 2).forEach((line, li) => {
             ctx.fillText(line, 126, y + 46 + li * 30);
@@ -211,8 +211,8 @@ export async function exportStoryboardWebm(options: {
       } else if (scene.type === 'conversation') {
         ctx.fillStyle = softBrand;
         ctx.fillRect(0, 8, 1280, 70);
-        ctx.fillStyle = '#0F172A';
-        ctx.font = '600 20px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = '#180136';
+        ctx.font = '600 20px Roboto, sans-serif';
         ctx.fillText(
           `Grounded in: ${c.articleTitle || 'Help Center'}`,
           72,
@@ -235,7 +235,7 @@ export async function exportStoryboardWebm(options: {
           const isCustomer = msg.speaker === 'customer';
           const boxW = 760;
           const boxX = isCustomer ? 72 : 1280 - 72 - boxW;
-          ctx.font = '400 20px "DM Sans", sans-serif';
+          ctx.font = '400 20px Roboto, sans-serif';
           const lines = wrapTextLines(ctx, displayText, boxW - 44).slice(0, 3);
           const boxH = 34 + lines.length * 28;
 
@@ -243,12 +243,12 @@ export async function exportStoryboardWebm(options: {
           drawRoundedRect(ctx, boxX, y, boxW, boxH, 12);
           ctx.fill();
           if (isCustomer) {
-            ctx.strokeStyle = '#CBD5E1';
+            ctx.strokeStyle = '#CED1DB';
             ctx.lineWidth = 1.5;
             ctx.stroke();
           }
 
-          ctx.fillStyle = isCustomer ? '#0F172A' : contrastInk;
+          ctx.fillStyle = isCustomer ? '#180136' : contrastInk;
           lines.forEach((line, li) => {
             ctx.fillText(line, boxX + 22, y + 32 + li * 28);
           });
@@ -262,35 +262,35 @@ export async function exportStoryboardWebm(options: {
           ctx.strokeStyle = brand;
           ctx.lineWidth = 2;
           ctx.stroke();
-          ctx.fillStyle = '#0F172A';
-          ctx.font = '700 18px "Plus Jakarta Sans", sans-serif';
+          ctx.fillStyle = '#180136';
+          ctx.font = '700 18px Roboto, sans-serif';
           ctx.fillText(
             `Handed over to human agent — ${c.handover.reason}`,
             96,
             Math.min(480, y + 6) + 36
           );
-          ctx.font = '400 17px "DM Sans", sans-serif';
+          ctx.font = '400 17px Roboto, sans-serif';
           const summary = c.handover.collectedFields
             .map((f) => `${f.label}: ${f.value}`)
             .join('   ·   ');
           ctx.fillText(summary, 96, Math.min(480, y + 6) + 72);
         }
       } else if (scene.type === 'capability_callout') {
-        ctx.fillStyle = '#0F172A';
-        ctx.font = '700 34px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = '#180136';
+        ctx.font = '700 34px Roboto, sans-serif';
         ctx.fillText('Matched capability', 96, 120);
 
         ctx.fillStyle = '#FFFFFF';
         drawRoundedRect(ctx, 96, 175, 510, 340, 12);
         ctx.fill();
-        ctx.strokeStyle = '#E2E8F0';
+        ctx.strokeStyle = '#EAEBEF';
         ctx.lineWidth = 2;
         ctx.stroke();
-        ctx.fillStyle = '#475569';
-        ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = '#5B5F73';
+        ctx.font = '600 16px Roboto, sans-serif';
         ctx.fillText('What you shared', 128, 220);
-        ctx.fillStyle = '#0F172A';
-        ctx.font = '400 22px "DM Sans", sans-serif';
+        ctx.fillStyle = '#180136';
+        ctx.font = '400 22px Roboto, sans-serif';
         wrapTextLines(ctx, `“${c.discoveryQuote || ''}”`, 445).forEach((l, i) => {
           ctx.fillText(l, 128, 265 + i * 32);
         });
@@ -299,11 +299,11 @@ export async function exportStoryboardWebm(options: {
         drawRoundedRect(ctx, 646, 175, 538, 340, 12);
         ctx.fill();
         ctx.fillStyle = contrastInk;
-        ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+        ctx.font = '700 22px Roboto, sans-serif';
         wrapTextLines(ctx, c.capabilityItem || '', 470).forEach((l, i) => {
           ctx.fillText(l, 678, 230 + i * 32);
         });
-        ctx.font = '400 19px "DM Sans", sans-serif';
+        ctx.font = '400 19px Roboto, sans-serif';
         wrapTextLines(ctx, c.explanation || '', 470).forEach((l, i) => {
           ctx.fillText(l, 678, 320 + i * 28);
         });
@@ -315,18 +315,18 @@ export async function exportStoryboardWebm(options: {
     ctx.fillStyle =
       scene.type === 'title_card' || scene.type === 'closing_card'
         ? contrastInk
-        : '#334155';
+        : '#5B5F73';
     ctx.globalAlpha = 0.72;
-    ctx.font = '500 15px "DM Sans", sans-serif';
+    ctx.font = '500 15px Roboto, sans-serif';
     ctx.textAlign = 'right';
     ctx.fillText('Draft for internal review', 1244, 42);
     ctx.restore();
 
     // Captions bar
-    ctx.fillStyle = 'rgba(15, 23, 42, 0.86)';
+    ctx.fillStyle = 'rgba(24, 1, 54, 0.86)';
     ctx.fillRect(0, 622, 1280, 98);
     ctx.fillStyle = '#FFFFFF';
-    ctx.font = '400 21px "DM Sans", sans-serif';
+    ctx.font = '400 21px Roboto, sans-serif';
     const capLines = wrapTextLines(ctx, scene.narrationText, 1120).slice(0, 2);
     capLines.forEach((line, idx) => {
       ctx.fillText(line, 80, 662 + idx * 30);
@@ -362,7 +362,7 @@ export async function exportStoryboardWebm(options: {
       ctx.save();
       ctx.fillStyle = '#FFFFFF';
       ctx.globalAlpha = 0.72;
-      ctx.font = '500 15px "DM Sans", sans-serif';
+      ctx.font = '500 15px Roboto, sans-serif';
       ctx.textAlign = 'right';
       ctx.fillText('Draft for internal review', 1244, 42);
       ctx.restore();

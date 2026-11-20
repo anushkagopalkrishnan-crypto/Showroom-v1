@@ -30,7 +30,7 @@ export default function App() {
     helpContent: '',
     discoveryNotes: '',
     capabilities: '',
-    brandColor: '#1B4965',
+    brandColor: '#5405BD', // Talkdesk Purple (Cobalt Primary/9); fixed, not user-editable
     targetLength: 90,
   });
 

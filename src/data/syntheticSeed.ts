@@ -3,7 +3,7 @@ import type { SetupInput } from '../types/showroom';
 export const SYNTHETIC_SETUP_DATA: SetupInput = {
   prospectName: 'Northwind Credit Union',
   industry: 'Retail Banking & Member Services',
-  brandColor: '#1B4965',
+  brandColor: '#5405BD', // Talkdesk Purple (Cobalt Primary/9); fixed, not user-editable
   targetLength: 90,
   helpContent: `# Northwind Credit Union Member Help Center (Synthetic)
 

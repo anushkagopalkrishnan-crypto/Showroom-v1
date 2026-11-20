@@ -76,7 +76,7 @@ export function VideoTab({
 
   const brand = useMemo(() => normalizeHexColor(brandColor), [brandColor]);
   const contrastInk = useMemo(() => getContrastTextColor(brand), [brand]);
-  const deepBrand = useMemo(() => mixHexColor(brand, '#0F172A', 0.38), [brand]);
+  const deepBrand = useMemo(() => mixHexColor(brand, '#180136', 0.38), [brand]);
   const softBrand = useMemo(() => mixHexColor(brand, '#FFFFFF', 0.92), [brand]);
 
   // Adjust scene durations slightly if cached TTS audio exceeds initial duration so narration never clips
@@ -449,9 +449,9 @@ export function VideoTab({
         data-playing={isPlaying ? 'true' : 'false'}
         data-scene-index={position.sceneIndex}
         data-scene-type={currentScene.type}
-        className="video-scene overflow-hidden rounded-cb-md border border-slate-300 bg-slate-950 shadow-sm"
+        className="overflow-hidden rounded-cb-md border border-cb-border-strong bg-cb-text shadow-sm"
       >
-        <div className="relative aspect-video w-full overflow-hidden bg-slate-900">
+        <div className="relative aspect-video w-full overflow-hidden bg-cb-primary">
           <StageSceneRenderer
             scene={currentScene}
             sceneProgress={position.sceneProgress}
@@ -475,7 +475,7 @@ export function VideoTab({
                 currentScene.type === 'title_card' ||
                 currentScene.type === 'closing_card'
                   ? contrastInk
-                  : '#334155',
+                  : '#5B5F73',
               opacity: 0.72,
             }}
           >
@@ -484,7 +484,7 @@ export function VideoTab({
         </div>
 
         {/* Synchronized Captions */}
-        <div className="border-t border-slate-800 bg-slate-950 px-4 py-3 text-center sm:px-6 sm:py-3.5">
+        <div className="border-t border-cb-text bg-cb-text px-4 py-3 text-center sm:px-6 sm:py-3.5">
           <p
             data-testid="video-captions"
             className="mx-auto max-w-3xl text-xs leading-snug text-white sm:text-base"
@@ -669,14 +669,14 @@ function StageSceneRenderer({
       <div
         className="flex h-full w-full flex-col justify-center px-8 pt-6 pb-20 sm:px-14"
         style={{
-          background: `linear-gradient(180deg, ${softBrand} 0%, #F8FAFC 100%)`,
+          background: `linear-gradient(180deg, ${softBrand} 0%, #F4F5F7 100%)`,
         }}
       >
         <div
           className="mb-3 h-1 w-14 rounded-full"
           style={{ backgroundColor: brand }}
         />
-        <h2 className="text-xl font-bold text-slate-900 sm:text-3xl">
+        <h2 className="text-xl font-bold text-cb-text sm:text-3xl">
           {c.heading || 'What we heard'}
         </h2>
         <div className="mt-4 grid grid-cols-1 gap-3">
@@ -685,13 +685,13 @@ function StageSceneRenderer({
             return (
               <div
                 key={idx}
-                className="rounded-lg border border-slate-200 bg-white px-5 py-3 transition-all duration-300"
+                className="rounded-lg border border-cb-border bg-white px-5 py-3 transition-all duration-300"
                 style={{
                   opacity: visible ? 1 : 0,
                   transform: visible ? 'translateY(0px)' : 'translateY(10px)',
                 }}
               >
-                <p className="text-sm leading-relaxed text-slate-800 sm:text-base">
+                <p className="text-sm leading-relaxed text-cb-text sm:text-base">
                   “{quote}”
                 </p>
               </div>
@@ -711,12 +711,12 @@ function StageSceneRenderer({
     );
 
     return (
-      <div className="flex h-full w-full flex-col bg-slate-50 pb-16">
+      <div className="flex h-full w-full flex-col bg-cb-bg pb-16">
         <div
-          className="flex items-center justify-between border-b border-slate-200 px-8 py-3.5"
+          className="flex items-center justify-between border-b border-cb-border px-8 py-3.5"
           style={{ backgroundColor: softBrand }}
         >
-          <p className="text-xs font-semibold text-slate-900 sm:text-sm">
+          <p className="text-xs font-semibold text-cb-text sm:text-sm">
             Help article: {c.articleTitle || 'Knowledge base'}
           </p>
         </div>
@@ -740,9 +740,9 @@ function StageSceneRenderer({
                 }`}
               >
                 <div
-                  className={`max-w-[78%] rounded-xl px-4 py-2.5 text-xs leading-relaxed sm:text-sm ${
+                  className={`max-w-[78%] rounded-lg px-4 py-2.5 text-xs leading-relaxed sm:text-sm ${
                     isCustomer
-                      ? 'border border-slate-200 bg-white text-slate-900'
+                      ? 'border border-cb-border bg-white text-cb-text'
                       : ''
                   }`}
                   style={
@@ -773,14 +773,14 @@ function StageSceneRenderer({
               className="mt-2 rounded-lg border bg-white px-4 py-3 transition-opacity duration-300"
               style={{ borderColor: brand }}
             >
-              <p className="text-xs font-semibold text-slate-900">
+              <p className="text-xs font-semibold text-cb-text">
                 Handed over to human agent — {c.handover.reason}
               </p>
-              <div className="mt-1.5 flex flex-wrap gap-x-5 gap-y-1 text-xs text-slate-600">
+              <div className="mt-1.5 flex flex-wrap gap-x-5 gap-y-1 text-xs text-cb-desc">
                 {c.handover.collectedFields.map((field, fIdx) => (
                   <span key={fIdx}>
                     {field.label}:{' '}
-                    <strong className="font-medium text-slate-900">
+                    <strong className="font-medium text-cb-text">
                       {field.value}
                     </strong>
                   </span>
@@ -796,17 +796,17 @@ function StageSceneRenderer({
   // capability_callout
   const opacity = Math.min(1, 0.25 + sceneProgress * 2.5);
   return (
-    <div className="flex h-full w-full flex-col justify-center bg-slate-50 px-8 pb-16 sm:px-14">
+    <div className="flex h-full w-full flex-col justify-center bg-cb-bg px-8 pb-16 sm:px-14">
       <div className="space-y-4" style={{ opacity }}>
-        <h2 className="text-xl font-bold text-slate-900 sm:text-2xl">
+        <h2 className="text-xl font-bold text-cb-text sm:text-2xl">
           Matched capability
         </h2>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <div className="rounded-lg border border-slate-200 bg-white p-5">
-            <p className="text-xs font-semibold text-slate-500">
+          <div className="rounded-lg border border-cb-border bg-white p-5">
+            <p className="text-xs font-semibold text-cb-desc">
               Discovery need
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-slate-900 sm:text-base">
+            <p className="mt-2 text-sm leading-relaxed text-cb-text sm:text-base">
               “{c.discoveryQuote}”
             </p>
           </div>

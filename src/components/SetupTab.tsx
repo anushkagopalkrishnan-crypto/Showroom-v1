@@ -68,7 +68,7 @@ export function SetupTab({
       helpContent: '',
       discoveryNotes: '',
       capabilities: '',
-      brandColor: '#1B4965',
+      brandColor: '#5405BD', // Talkdesk Purple (Cobalt Primary/9); fixed, not user-editable
       targetLength: 90,
     });
     setValidationErrors({});
@@ -155,37 +155,6 @@ export function SetupTab({
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div>
-            <span className="block text-sm font-medium text-cb-text">
-              Brand colour
-            </span>
-            <div className="mt-1.5 flex items-center gap-3">
-              <label htmlFor="brand-color-picker" className="sr-only">
-                Brand colour picker
-              </label>
-              <input
-                id="brand-color-picker"
-                type="color"
-                value={input.brandColor}
-                onChange={(e) => updateField('brandColor', e.target.value)}
-                className="h-9 w-12 cursor-pointer rounded border border-cb-border-strong bg-white p-0.5"
-              />
-              <label htmlFor="brand-color-hex" className="sr-only">
-                Brand colour hex code
-              </label>
-              <input
-                id="brand-color-hex"
-                type="text"
-                value={input.brandColor}
-                onChange={(e) => updateField('brandColor', e.target.value)}
-                className="w-28 rounded-cb-sm border border-cb-border-strong bg-white px-3 py-1.5 font-mono text-xs text-cb-text uppercase focus:border-cb-focus focus:outline-none focus:ring-1 focus:ring-cb-focus"
-              />
-              <span className="text-xs text-cb-desc">
-                Used across the 16:9 video scenes
-              </span>
-            </div>
-          </div>
-
           <div>
             <span className="block text-sm font-medium text-cb-text">
               Target length
