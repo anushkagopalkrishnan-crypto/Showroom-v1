@@ -305,6 +305,7 @@ STRICT GROUNDING RULES:
 5. At least one conversation scene MUST end with a handover to a human agent (onScreenContent.handover), showing the non-sensitive triage details the AI agent already collected (e.g., merchant name, date, card possession status, intent).
 6. For capability_callout scenes: match ONE need from the discovery notes to ONE explicit item from Our Capabilities. If nothing in Our Capabilities genuinely matches a discovery need, DO NOT create a capability_callout scene.
 7. Every scene's narrationText MUST be 40 words or fewer. Aim for natural, concise spoken phrasing.
+7a. COPY STYLE (Talkdesk Cobalt UX writing): all on-screen text and narration is clear, positive, concise, and honest. Use sentence case, present tense, numerals (3, not three), and "you/your". No exclamation points, no emojis, and avoid "please" and "sorry" unless essential.
 8. Generate 6 to 8 ordered scenes whose durationSeconds sum closely to ${target} seconds.
    Required arc:
    - Scene 1: title_card ("Prepared for ${prospectName}" + one line on what the video covers)
@@ -430,6 +431,7 @@ STRICT RULES:
 4. Conversation answers MUST NOT contain account-specific details (no balances, card numbers, account IDs).
 5. If this is a conversation scene and currentScene had a handover, preserve a handover to a human agent with collected non-sensitive details.
 6. narrationText MUST be 40 words or fewer.
+6a. COPY STYLE (Talkdesk Cobalt UX writing): clear, positive, concise, sentence case, present tense, numerals, no exclamation points or emojis.
 7. Provide a fresh variation on wording/angle while staying strictly grounded.`;
 
       const prompt = `Prospect: ${setup.prospectName} (${setup.industry})

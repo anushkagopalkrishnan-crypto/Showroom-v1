@@ -616,7 +616,7 @@ function StageSceneRenderer({
           <p className="text-[11px] font-medium tracking-wide opacity-80 sm:text-xs">
             Tailored walkthrough
           </p>
-          <h2 className="text-xl font-bold leading-tight tracking-tight text-balance sm:text-5xl">
+          <h2 className="text-xl font-medium leading-tight tracking-tight text-balance sm:text-5xl">
             {c.headline || 'Prepared for prospect'}
           </h2>
           {c.subtitle && (
@@ -640,7 +640,7 @@ function StageSceneRenderer({
         }}
       >
         <div className="max-w-3xl space-y-3 sm:space-y-5" style={{ opacity }}>
-          <h2 className="text-lg font-bold tracking-tight sm:text-4xl">
+          <h2 className="text-lg font-medium tracking-tight sm:text-4xl">
             {c.heading || 'Suggested next steps'}
           </h2>
           <ul className="space-y-2 sm:space-y-3">
@@ -676,7 +676,7 @@ function StageSceneRenderer({
           className="mb-3 h-1 w-14 rounded-full"
           style={{ backgroundColor: brand }}
         />
-        <h2 className="text-xl font-bold text-cb-text sm:text-3xl">
+        <h2 className="text-xl font-medium text-cb-text sm:text-3xl">
           {c.heading || 'What we heard'}
         </h2>
         <div className="mt-4 grid grid-cols-1 gap-3">
@@ -685,7 +685,7 @@ function StageSceneRenderer({
             return (
               <div
                 key={idx}
-                className="rounded-lg border border-cb-border bg-white px-5 py-3 transition-all duration-300"
+                className="rounded-[16px] border border-cb-border bg-white shadow-sm px-5 py-3 transition-all duration-300"
                 style={{
                   opacity: visible ? 1 : 0,
                   transform: visible ? 'translateY(0px)' : 'translateY(10px)',
@@ -716,7 +716,7 @@ function StageSceneRenderer({
           className="flex items-center justify-between border-b border-cb-border px-8 py-3.5"
           style={{ backgroundColor: softBrand }}
         >
-          <p className="text-xs font-semibold text-cb-text sm:text-sm">
+          <p className="text-xs font-medium text-cb-text sm:text-sm">
             Help article: {c.articleTitle || 'Knowledge base'}
           </p>
         </div>
@@ -740,7 +740,7 @@ function StageSceneRenderer({
                 }`}
               >
                 <div
-                  className={`max-w-[78%] rounded-lg px-4 py-2.5 text-xs leading-relaxed sm:text-sm ${
+                  className={`max-w-[78%] rounded-[16px] px-4 py-2.5 text-xs leading-relaxed sm:text-sm ${
                     isCustomer
                       ? 'border border-cb-border bg-white text-cb-text'
                       : ''
@@ -751,7 +751,7 @@ function StageSceneRenderer({
                       : { backgroundColor: brand, color: contrastInk }
                   }
                 >
-                  <p className="mb-0.5 text-[10px] font-semibold opacity-70">
+                  <p className="mb-0.5 text-[10px] font-medium opacity-70">
                     {isCustomer ? 'Customer' : 'AI agent'}
                   </p>
                   <p>
@@ -770,11 +770,11 @@ function StageSceneRenderer({
 
           {chatState.showHandover && c.handover && (
             <div
-              className="mt-2 rounded-lg border bg-white px-4 py-3 transition-opacity duration-300"
+              className="mt-2 rounded-[16px] border bg-white shadow-sm px-4 py-3 transition-opacity duration-300"
               style={{ borderColor: brand }}
             >
-              <p className="text-xs font-semibold text-cb-text">
-                Handed over to human agent — {c.handover.reason}
+              <p className="text-xs font-medium text-cb-text">
+                Handed over to human agent: {c.handover.reason}
               </p>
               <div className="mt-1.5 flex flex-wrap gap-x-5 gap-y-1 text-xs text-cb-desc">
                 {c.handover.collectedFields.map((field, fIdx) => (
@@ -798,12 +798,12 @@ function StageSceneRenderer({
   return (
     <div className="flex h-full w-full flex-col justify-center bg-cb-bg px-8 pb-16 sm:px-14">
       <div className="space-y-4" style={{ opacity }}>
-        <h2 className="text-xl font-bold text-cb-text sm:text-2xl">
+        <h2 className="text-xl font-medium text-cb-text sm:text-2xl">
           Matched capability
         </h2>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <div className="rounded-lg border border-cb-border bg-white p-5">
-            <p className="text-xs font-semibold text-cb-desc">
+          <div className="rounded-[16px] border border-cb-border bg-white shadow-sm p-5">
+            <p className="text-xs font-medium text-cb-desc">
               Discovery need
             </p>
             <p className="mt-2 text-sm leading-relaxed text-cb-text sm:text-base">
@@ -811,11 +811,11 @@ function StageSceneRenderer({
             </p>
           </div>
           <div
-            className="rounded-lg p-5"
+            className="rounded-[16px] p-5"
             style={{ backgroundColor: brand, color: contrastInk }}
           >
-            <p className="text-xs font-semibold opacity-80">Our capability</p>
-            <p className="mt-2 text-sm font-semibold leading-snug sm:text-base">
+            <p className="text-xs font-medium opacity-80">Our capability</p>
+            <p className="mt-2 text-sm font-medium leading-snug sm:text-base">
               {c.capabilityItem}
             </p>
             {c.explanation && (
