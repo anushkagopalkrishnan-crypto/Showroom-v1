@@ -1,17 +1,52 @@
 @import "tailwindcss";
 
 @theme {
+  /* Cobalt (Talkdesk design system) for the Showroom app UI.
+     The generated video keeps its own fonts/colours (see .video-scene). */
+  --font-cobalt: "Roboto", ui-sans-serif, system-ui, sans-serif;
+  --font-cobalt-mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Video-scene fonts (unchanged; must match videoExporter.ts) */
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Cobalt colour tokens. Values come from Talkdesk Brand Guidelines 4.0.1
+     (Talkdesk Purple #5405BD, Deep Purple #180136, purple/neutral tints).
+     Hover, description, and semantic (error/warning/success) values are
+     approximations until swapped for the Figma "Theme" variables. */
+  --color-cb-text: #180136; /* Colors/Text/Default */
+  --color-cb-desc: #5b5f73; /* Colors/Text/Description */
+  --color-cb-placeholder: #949bad; /* Colors/Text/Placeholder */
+  --color-cb-bg: #f4f5f7; /* Backgrounds/default (neutral) */
+  --color-cb-border: #eaebef; /* Secondary/6 */
+  --color-cb-border-strong: #ced1db; /* Secondary/7 */
+  --color-cb-hover: #eaebef; /* Backgrounds/hover */
+  --color-cb-primary: #5405bd; /* Primary/9 */
+  --color-cb-primary-hover: #4a04a6; /* Primary/10 */
+  --color-cb-primary-subtle: #f2e9fe; /* Primary/3 */
+  --color-cb-primary-text: #5405bd; /* Primary/11 */
+  --color-cb-focus: #8023f9; /* Border colors/Focus (Primary/8) */
+  --color-cb-error: #d92d20;
+  --color-cb-error-bg: #fef3f2;
+  --color-cb-error-border: #f9c5c0;
+  --color-cb-error-text: #b42318;
+  --color-cb-warning-bg: #fff5cc;
+  --color-cb-warning-border: #ffe066;
+  --color-cb-warning-text: #5c4400;
+  --color-cb-success-text: #067647;
+
+  /* Cobalt border radius: Small 8px (buttons, inputs), Medium 16px (cards) */
+  --radius-cb-sm: 8px;
+  --radius-cb-md: 16px;
 }
 
 @layer base {
   html,
   body {
-    font-family: var(--font-sans);
-    background-color: #f8fafc;
-    color: #0f172a;
+    font-family: var(--font-cobalt);
+    background-color: var(--color-cb-bg);
+    color: var(--color-cb-text);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -20,7 +55,26 @@
   h2,
   h3,
   h4 {
+    font-family: var(--font-cobalt);
+  }
+
+  .font-mono {
+    font-family: var(--font-cobalt-mono);
+  }
+
+  /* The generated video is prospect-branded content, not app UI: keep its
+     original typography so the player matches the exported file. */
+  .video-scene {
+    font-family: var(--font-sans);
+  }
+  .video-scene h1,
+  .video-scene h2,
+  .video-scene h3,
+  .video-scene h4 {
     font-family: var(--font-display);
+  }
+  .video-scene .font-mono {
+    font-family: var(--font-mono);
   }
 }
 

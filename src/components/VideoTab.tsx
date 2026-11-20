@@ -273,18 +273,18 @@ export function VideoTab({
 
   if (scenes.length === 0) {
     return (
-      <div className="rounded-lg border border-slate-200 bg-white p-10 text-center">
-        <h2 className="text-lg font-semibold text-slate-900">
+      <div className="rounded-cb-md border border-cb-border bg-white p-10 text-center">
+        <h2 className="text-lg font-semibold text-cb-text">
           No video scenes ready yet
         </h2>
-        <p className="mx-auto mt-2 max-w-md text-sm text-slate-600">
+        <p className="mx-auto mt-2 max-w-md text-sm text-cb-desc">
           Build a storyboard from the Setup tab first, then return here to play
           the narrated 16:9 demo video.
         </p>
         <button
           type="button"
           onClick={onGoToSetup}
-          className="mt-5 inline-flex items-center rounded-md bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 whitespace-nowrap"
+          className="mt-5 inline-flex items-center rounded-cb-sm bg-cb-primary px-4 py-2 text-sm font-medium text-white hover:bg-cb-primary-hover whitespace-nowrap"
         >
           Go to Setup
         </button>
@@ -392,12 +392,12 @@ export function VideoTab({
 
   return (
     <div className="space-y-5">
-      <div className="flex flex-col gap-3 border-b border-slate-200 pb-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3 border-b border-cb-border pb-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h1 className="text-2xl font-semibold tracking-tight text-cb-text">
             Video preview
           </h1>
-          <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-slate-600 tabular-nums">
+          <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-cb-desc tabular-nums">
             <span>
               Scene {position.sceneIndex + 1} of {effectiveScenes.length}
             </span>
@@ -418,7 +418,7 @@ export function VideoTab({
           type="button"
           disabled={isExporting}
           onClick={handleDownloadVideo}
-          className="inline-flex items-center gap-2 rounded-md border border-slate-300 bg-white px-3.5 py-2 text-xs font-medium text-slate-800 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60 whitespace-nowrap shrink-0"
+          className="inline-flex items-center gap-2 rounded-cb-sm border border-cb-border-strong bg-white px-3.5 py-2 text-xs font-medium text-cb-text transition-colors hover:bg-cb-bg disabled:cursor-not-allowed disabled:opacity-60 whitespace-nowrap shrink-0"
         >
           {isExporting ? (
             <>
@@ -437,7 +437,7 @@ export function VideoTab({
       {exportError && (
         <div
           role="alert"
-          className="rounded-md border border-red-200 bg-red-50 px-4 py-2.5 text-xs text-red-800"
+          className="rounded-cb-sm border border-cb-error-border bg-cb-error-bg px-4 py-2.5 text-xs text-cb-error-text"
         >
           {exportError}
         </div>
@@ -449,7 +449,7 @@ export function VideoTab({
         data-playing={isPlaying ? 'true' : 'false'}
         data-scene-index={position.sceneIndex}
         data-scene-type={currentScene.type}
-        className="overflow-hidden rounded-lg border border-slate-300 bg-slate-950 shadow-sm"
+        className="video-scene overflow-hidden rounded-cb-md border border-slate-300 bg-slate-950 shadow-sm"
       >
         <div className="relative aspect-video w-full overflow-hidden bg-slate-900">
           <StageSceneRenderer
@@ -495,7 +495,7 @@ export function VideoTab({
       </div>
 
       {/* Player Controls */}
-      <div className="rounded-lg border border-slate-200 bg-white p-4 space-y-3">
+      <div className="rounded-cb-md border border-cb-border bg-white p-4 space-y-3">
         <div
           role="slider"
           tabIndex={0}
@@ -511,7 +511,7 @@ export function VideoTab({
               setElapsed((p) => Math.max(0, p - 5));
             }
           }}
-          className="relative h-2.5 w-full cursor-pointer overflow-hidden rounded-full bg-slate-200"
+          className="relative h-2.5 w-full cursor-pointer overflow-hidden rounded-full bg-cb-hover"
         >
           <div
             className="h-full transition-[width] duration-75"
@@ -537,7 +537,7 @@ export function VideoTab({
             <button
               type="button"
               onClick={handleTogglePlay}
-              className="inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-slate-800 whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-2 rounded-cb-sm bg-cb-primary px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-cb-primary-hover whitespace-nowrap shrink-0"
             >
               {isPlaying || introPlaying || outroPlaying ? (
                 <>
@@ -554,7 +554,7 @@ export function VideoTab({
             <button
               type="button"
               onClick={handleRestart}
-              className="inline-flex items-center gap-1.5 rounded-md border border-slate-300 bg-white px-3 py-2 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900 whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-1.5 rounded-cb-sm border border-cb-border-strong bg-white px-3 py-2 text-xs font-medium text-cb-text transition-colors hover:bg-cb-bg hover:text-cb-text whitespace-nowrap shrink-0"
             >
               <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />
               Restart
@@ -563,7 +563,7 @@ export function VideoTab({
               type="button"
               onClick={handleToggleMute}
               aria-label={isMuted ? 'Unmute voiceover' : 'Mute voiceover'}
-              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-slate-300 bg-white text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-cb-sm border border-cb-border-strong bg-white text-cb-text transition-colors hover:bg-cb-bg hover:text-cb-text"
             >
               {isMuted ? (
                 <VolumeX className="h-3.5 w-3.5" aria-hidden="true" />
@@ -573,7 +573,7 @@ export function VideoTab({
             </button>
           </div>
 
-          <div className="font-mono text-xs text-slate-600 tabular-nums">
+          <div className="font-mono text-xs text-cb-desc tabular-nums">
             {formatTime(elapsed)} / {formatTime(timeline.totalDuration)}
           </div>
         </div>

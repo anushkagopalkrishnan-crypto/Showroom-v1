@@ -170,20 +170,20 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-cb-bg text-cb-text">
       {/* Permanent top banner required across the whole app */}
       <div
         role="banner"
-        className="border-b border-amber-300 bg-amber-100 px-4 py-1.5 text-center text-xs font-medium text-amber-950"
+        className="border-b border-cb-warning-border bg-cb-warning-bg px-4 py-1.5 text-center text-xs font-medium text-cb-warning-text"
       >
         Prototype. Synthetic data only. Do not enter real customer or prospect
         data.
       </div>
 
       {/* Top Navigation Bar */}
-      <header className="border-b border-slate-200 bg-white">
+      <header className="border-b border-cb-border bg-white">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-6 sm:py-3.5">
-          <span className="font-display text-lg font-bold tracking-tight text-slate-900 whitespace-nowrap shrink-0">
+          <span className="font-cobalt text-lg font-bold tracking-tight text-cb-text whitespace-nowrap shrink-0">
             Showroom
           </span>
 
@@ -201,10 +201,10 @@ export default function App() {
                   type="button"
                   aria-selected={active}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`rounded-md px-2.5 py-1.5 text-xs font-medium transition-colors whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 sm:px-3.5 sm:text-sm ${
+                  className={`rounded-cb-sm px-2.5 py-1.5 text-xs font-medium transition-colors whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cb-focus sm:px-3.5 sm:text-sm ${
                     active
-                      ? 'bg-slate-900 text-white'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      ? 'bg-cb-primary-subtle font-semibold text-cb-primary-text'
+                      : 'text-cb-desc hover:bg-cb-hover hover:text-cb-text'
                   }`}
                 >
                   {tab.label}

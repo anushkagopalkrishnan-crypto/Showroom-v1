@@ -68,12 +68,12 @@ export function FollowUpTab({
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col gap-4 border-b border-slate-200 pb-6 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-4 border-b border-cb-border pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">
+          <h1 className="text-2xl font-semibold tracking-tight text-cb-text">
             Post-demo follow-up
           </h1>
-          <p className="mt-1 text-sm text-slate-600">
+          <p className="mt-1 text-sm text-cb-desc">
             Extract buyer requests and team commitments from a reply or call
             transcript, assign owners, and prepare a grounded follow-up email.
           </p>
@@ -85,7 +85,7 @@ export function FollowUpTab({
             setValidationError(null);
             setUploadedFileName(null);
           }}
-          className="inline-flex items-center rounded-md border border-slate-300 bg-white px-3.5 py-2 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900 whitespace-nowrap shrink-0"
+          className="inline-flex items-center rounded-cb-sm border border-cb-border-strong bg-white px-3.5 py-2 text-xs font-medium text-cb-text transition-colors hover:bg-cb-bg hover:text-cb-text whitespace-nowrap shrink-0"
         >
           Load synthetic transcript
         </button>
@@ -96,13 +96,13 @@ export function FollowUpTab({
           <div className="flex items-center justify-between gap-3">
             <label
               htmlFor="followup-transcript"
-              className="block text-sm font-medium text-slate-900"
+              className="block text-sm font-medium text-cb-text"
             >
               Buyer reply or call transcript
             </label>
             <div className="flex items-center gap-2">
               {uploadedFileName && (
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-cb-desc">
                   Loaded {uploadedFileName}
                 </span>
               )}
@@ -126,10 +126,10 @@ export function FollowUpTab({
               if (validationError) setValidationError(null);
             }}
             placeholder="Paste the buyer's email reply or synthetic post-demo call transcript..."
-            className="mt-2 block w-full rounded-md border border-slate-300 bg-white px-3.5 py-2.5 text-sm leading-relaxed text-slate-900 placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+            className="mt-2 block w-full rounded-cb-sm border border-cb-border-strong bg-white px-3.5 py-2.5 text-sm leading-relaxed text-cb-text placeholder:text-cb-placeholder focus:border-cb-focus focus:outline-none focus:ring-1 focus:ring-cb-focus"
           />
           {validationError && (
-            <p className="mt-1.5 text-xs text-red-700" role="alert">
+            <p className="mt-1.5 text-xs text-cb-error-text" role="alert">
               {validationError}
             </p>
           )}
@@ -138,7 +138,7 @@ export function FollowUpTab({
         {analyzeError && (
           <div
             role="alert"
-            className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+            className="rounded-cb-sm border border-cb-error-border bg-cb-error-bg px-4 py-3 text-sm text-cb-error-text"
           >
             {analyzeError}
           </div>
@@ -148,7 +148,7 @@ export function FollowUpTab({
           <button
             type="submit"
             disabled={isAnalyzing}
-            className="inline-flex items-center gap-2 rounded-md bg-slate-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 whitespace-nowrap shrink-0"
+            className="inline-flex items-center gap-2 rounded-cb-sm bg-cb-primary px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-cb-primary-hover disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cb-focus whitespace-nowrap shrink-0"
           >
             {isAnalyzing ? (
               <>
@@ -166,12 +166,12 @@ export function FollowUpTab({
       </form>
 
       {isAnalyzing && !result && (
-        <div className="rounded-lg border border-slate-200 bg-white p-6">
+        <div className="rounded-cb-md border border-cb-border bg-white p-6">
           <div className="animate-pulse space-y-3">
-            <div className="h-5 w-48 rounded bg-slate-200" />
-            <div className="h-10 w-full rounded bg-slate-100" />
-            <div className="h-10 w-full rounded bg-slate-100" />
-            <div className="h-10 w-full rounded bg-slate-100" />
+            <div className="h-5 w-48 rounded bg-cb-hover" />
+            <div className="h-10 w-full rounded bg-cb-hover" />
+            <div className="h-10 w-full rounded bg-cb-hover" />
+            <div className="h-10 w-full rounded bg-cb-hover" />
           </div>
         </div>
       )}
@@ -180,24 +180,24 @@ export function FollowUpTab({
         <div className="space-y-8" data-testid="followup-results">
           <section aria-label="Requests table" className="space-y-3">
             <div className="flex items-baseline justify-between">
-              <h2 className="text-lg font-semibold text-slate-900">
+              <h2 className="text-lg font-semibold text-cb-text">
                 Requests and commitments
               </h2>
-              <span className="font-mono text-xs text-slate-500 tabular-nums">
+              <span className="font-mono text-xs text-cb-desc tabular-nums">
                 {result.requests.length} items
               </span>
             </div>
 
             {result.requests.length === 0 ? (
-              <div className="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-600">
+              <div className="rounded-cb-md border border-cb-border bg-white p-6 text-sm text-cb-desc">
                 No explicit buyer requests or team commitments were found in
                 this transcript.
               </div>
             ) : (
-              <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+              <div className="overflow-x-auto rounded-cb-md border border-cb-border bg-white">
                 <table className="w-full border-collapse text-left text-sm">
                   <thead>
-                    <tr className="border-b border-slate-200 bg-slate-50 text-xs font-semibold text-slate-600">
+                    <tr className="border-b border-cb-border bg-cb-bg text-xs font-semibold text-cb-desc">
                       <th className="px-4 py-3">Request</th>
                       <th className="px-4 py-3">Who asked (role)</th>
                       <th className="px-4 py-3">Exact quote</th>
@@ -206,22 +206,22 @@ export function FollowUpTab({
                       <th className="px-4 py-3">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-y divide-cb-border">
                     {result.requests.map((req) => (
-                      <tr key={req.id} className="align-top hover:bg-slate-50/60">
-                        <td className="px-4 py-3 font-medium text-slate-900 min-w-[200px]">
+                      <tr key={req.id} className="align-top hover:bg-cb-bg/60">
+                        <td className="px-4 py-3 font-medium text-cb-text min-w-[200px]">
                           {req.request}
                         </td>
-                        <td className="px-4 py-3 text-slate-700 whitespace-nowrap">
+                        <td className="px-4 py-3 text-cb-text whitespace-nowrap">
                           {req.askedByRole}
                         </td>
-                        <td className="px-4 py-3 text-xs leading-relaxed text-slate-600 min-w-[240px]">
+                        <td className="px-4 py-3 text-xs leading-relaxed text-cb-desc min-w-[240px]">
                           “{req.exactQuote}”
                         </td>
-                        <td className="px-4 py-3 text-slate-700 whitespace-nowrap">
+                        <td className="px-4 py-3 text-cb-text whitespace-nowrap">
                           {req.suggestedOwner}
                         </td>
-                        <td className="px-4 py-3 font-mono text-xs text-slate-700 tabular-nums whitespace-nowrap">
+                        <td className="px-4 py-3 font-mono text-xs text-cb-text tabular-nums whitespace-nowrap">
                           {req.dueDate}
                         </td>
                         <td className="px-4 py-3">
@@ -240,7 +240,7 @@ export function FollowUpTab({
                                 e.target.value as FollowUpStatus
                               )
                             }
-                            className="rounded border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-800 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+                            className="rounded border border-cb-border-strong bg-white px-2.5 py-1.5 text-xs font-medium text-cb-text focus:border-cb-focus focus:outline-none focus:ring-1 focus:ring-cb-focus"
                           >
                             {STATUS_OPTIONS.map((opt) => (
                               <option key={opt} value={opt}>
@@ -258,23 +258,23 @@ export function FollowUpTab({
           </section>
 
           <section aria-label="Draft follow-up email" className="space-y-3">
-            <div className="rounded-md border border-amber-200 bg-amber-50/70 px-4 py-2.5 text-xs font-semibold text-amber-950">
+            <div className="rounded-cb-sm border border-cb-warning-border bg-cb-warning-bg px-4 py-2.5 text-xs font-semibold text-cb-warning-text">
               Draft. The account owner must review this before sending.
             </div>
 
-            <div className="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
-                <h2 className="text-lg font-semibold text-slate-900">
+            <div className="rounded-cb-md border border-cb-border bg-white p-5 space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-cb-border pb-3">
+                <h2 className="text-lg font-semibold text-cb-text">
                   Draft follow-up email
                 </h2>
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-1.5 rounded-md border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900 whitespace-nowrap shrink-0"
+                  className="inline-flex items-center gap-1.5 rounded-cb-sm border border-cb-border-strong bg-white px-3 py-1.5 text-xs font-medium text-cb-text transition-colors hover:bg-cb-bg hover:text-cb-text whitespace-nowrap shrink-0"
                 >
                   {copied ? (
                     <>
-                      <Check className="h-3.5 w-3.5 text-emerald-700" aria-hidden="true" />
+                      <Check className="h-3.5 w-3.5 text-cb-success-text" aria-hidden="true" />
                       Copied
                     </>
                   ) : (
@@ -289,7 +289,7 @@ export function FollowUpTab({
               <div>
                 <label
                   htmlFor="draft-email-subject"
-                  className="block text-xs font-medium text-slate-500"
+                  className="block text-xs font-medium text-cb-desc"
                 >
                   Subject
                 </label>
@@ -300,14 +300,14 @@ export function FollowUpTab({
                   onChange={(e) =>
                     onEmailChange({ draftEmailSubject: e.target.value })
                   }
-                  className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-900 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+                  className="mt-1 block w-full rounded-cb-sm border border-cb-border-strong bg-white px-3 py-2 text-sm font-medium text-cb-text focus:border-cb-focus focus:outline-none focus:ring-1 focus:ring-cb-focus"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="draft-email-body"
-                  className="block text-xs font-medium text-slate-500"
+                  className="block text-xs font-medium text-cb-desc"
                 >
                   Body
                 </label>
@@ -318,7 +318,7 @@ export function FollowUpTab({
                   onChange={(e) =>
                     onEmailChange({ draftEmailBody: e.target.value })
                   }
-                  className="mt-1 block w-full rounded-md border border-slate-300 bg-white px-3.5 py-2.5 text-sm leading-relaxed text-slate-900 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"
+                  className="mt-1 block w-full rounded-cb-sm border border-cb-border-strong bg-white px-3.5 py-2.5 text-sm leading-relaxed text-cb-text focus:border-cb-focus focus:outline-none focus:ring-1 focus:ring-cb-focus"
                 />
               </div>
             </div>
