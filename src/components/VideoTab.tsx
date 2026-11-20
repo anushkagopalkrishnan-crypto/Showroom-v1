@@ -21,6 +21,7 @@ import {
   normalizeHexColor,
 } from '../utils/showroomLogic';
 import { exportStoryboardWebm } from '../utils/videoExporter';
+import { ClipOverlay } from './ClipOverlay';
 
 interface VideoTabProps {
   scenes: StoryboardScene[];
@@ -51,6 +52,10 @@ export function VideoTab({
   onGoToSetup,
 }: VideoTabProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+  // Talkdesk logo intro that plays before the scenes when starting from 0:00
+  const [introPlaying, setIntroPlaying] = useState(false);
+  // Talkdesk ending clip that plays after the last scene
+  const [outroPlaying, setOutroPlaying] = useState(false);
   const [elapsed, setElapsed] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [ttsStatus, setTtsStatus] = useState<
@@ -249,6 +254,7 @@ export function VideoTab({
         if (next >= timeline.totalDuration) {
           setIsPlaying(false);
           stopAllAudio();
+          setOutroPlaying(true);
           return timeline.totalDuration;
         }
         return next;
@@ -286,7 +292,21 @@ export function VideoTab({
     );
   }
 
+  const handleIntroDone = () => {
+    setIntroPlaying(false);
+    lastSpokenSceneKeyRef.current = null;
+    setIsPlaying(true);
+  };
+
   const handleTogglePlay = () => {
+    if (introPlaying) {
+      setIntroPlaying(false);
+      return;
+    }
+    if (outroPlaying) {
+      setOutroPlaying(false);
+      return;
+    }
     if (isPlaying) {
       setIsPlaying(false);
       stopAllAudio();
@@ -294,6 +314,12 @@ export function VideoTab({
     }
     if (elapsed >= timeline.totalDuration - 0.1) {
       setElapsed(0);
+      setIntroPlaying(true);
+      return;
+    }
+    if (elapsed < 0.05) {
+      setIntroPlaying(true);
+      return;
     }
     lastSpokenSceneKeyRef.current = null;
     setIsPlaying(true);
@@ -303,7 +329,9 @@ export function VideoTab({
     stopAllAudio();
     setElapsed(0);
     lastSpokenSceneKeyRef.current = null;
-    setIsPlaying(true);
+    setIsPlaying(false);
+    setOutroPlaying(false);
+    setIntroPlaying(true);
   };
 
   const handleToggleMute = () => {
@@ -433,6 +461,11 @@ export function VideoTab({
             contrastInk={contrastInk}
           />
 
+          {introPlaying && <ClipOverlay clip="intro" onDone={handleIntroDone} />}
+          {outroPlaying && (
+            <ClipOverlay clip="outro" onDone={() => setOutroPlaying(false)} />
+          )}
+
           {/* Watermark on every scene */}
           <div
             aria-label="Draft watermark"
@@ -456,7 +489,7 @@ export function VideoTab({
             data-testid="video-captions"
             className="mx-auto max-w-3xl text-xs leading-snug text-white sm:text-base"
           >
-            {currentScene.narrationText}
+            {introPlaying || outroPlaying ? ' ' : currentScene.narrationText}
           </p>
         </div>
       </div>
@@ -506,7 +539,7 @@ export function VideoTab({
               onClick={handleTogglePlay}
               className="inline-flex items-center gap-2 rounded-md bg-slate-900 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-slate-800 whitespace-nowrap shrink-0"
             >
-              {isPlaying ? (
+              {isPlaying || introPlaying || outroPlaying ? (
                 <>
                   <Pause className="h-3.5 w-3.5" aria-hidden="true" />
                   Pause

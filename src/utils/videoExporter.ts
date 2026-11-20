@@ -8,6 +8,11 @@ import {
   mixHexColor,
   normalizeHexColor,
 } from './showroomLogic';
+import {
+  clipSeconds,
+  drawBrandClipFrame,
+  loadBrandClip,
+} from './brandClips';
 
 function wrapTextLines(
   ctx: CanvasRenderingContext2D,
@@ -67,10 +72,16 @@ export async function exportStoryboardWebm(options: {
   if (!ctx) throw new Error('Could not create 2D canvas for video export.');
 
   const timeline = computeTimeline(scenes);
-  const totalSeconds = timeline.totalDuration;
-  if (totalSeconds <= 0) {
+  if (timeline.totalDuration <= 0) {
     throw new Error('Storyboard has no playable duration.');
   }
+
+  // Talkdesk logo intro plays first; skipped if the clip can't load here.
+  const introVideo = await loadBrandClip('intro');
+  const outroVideo = await loadBrandClip('outro');
+  const introSeconds = introVideo ? clipSeconds('intro') : 0;
+  const outroSeconds = outroVideo ? clipSeconds('outro') : 0;
+  const totalSeconds = introSeconds + timeline.totalDuration + outroSeconds;
 
   const brand = normalizeHexColor(brandColor);
   const contrastInk = getContrastTextColor(brand);
@@ -96,7 +107,7 @@ export async function exportStoryboardWebm(options: {
           const source = audioCtx.createBufferSource();
           source.buffer = decoded;
           source.connect(dest);
-          source.start(audioCtx.currentTime + seg.start);
+          source.start(audioCtx.currentTime + introSeconds + seg.start);
           scheduledSources.push(source);
         }
       }
@@ -340,10 +351,39 @@ export async function exportStoryboardWebm(options: {
 
     recorder.start(200);
     const startMs = performance.now();
+    if (introVideo) {
+      introVideo.play().catch(() => undefined);
+    }
+    const scenesEnd = introSeconds + timeline.totalDuration;
+    let outroStarted = false;
+
+    const drawBrandClip = (video: HTMLVideoElement) => {
+      drawBrandClipFrame(ctx, video, 1280, 720);
+      ctx.save();
+      ctx.fillStyle = '#FFFFFF';
+      ctx.globalAlpha = 0.72;
+      ctx.font = '500 15px "DM Sans", sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText('Draft for internal review', 1244, 42);
+      ctx.restore();
+    };
 
     const step = () => {
       const elapsed = (performance.now() - startMs) / 1000;
-      renderFrame(Math.min(elapsed, totalSeconds));
+      if (introVideo && elapsed < introSeconds) {
+        drawBrandClip(introVideo);
+      } else if (elapsed < scenesEnd) {
+        if (introVideo) introVideo.pause();
+        renderFrame(Math.min(elapsed - introSeconds, timeline.totalDuration));
+      } else if (outroVideo) {
+        if (!outroStarted) {
+          outroStarted = true;
+          outroVideo.play().catch(() => undefined);
+        }
+        drawBrandClip(outroVideo);
+      } else {
+        renderFrame(timeline.totalDuration);
+      }
       if (onProgress) {
         onProgress(Math.min(100, Math.round((elapsed / totalSeconds) * 100)));
       }
